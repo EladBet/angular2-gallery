@@ -1,8 +1,39 @@
-<h3>Top Heroes</h3>
-<div class="grid grid-pad">
-  <div *ngFor="#hero of heroes" (click)="gotoDetail(hero)" class="col-1-4">
-    <div class="module hero">
-      <h4>{{hero.name}}</h4>
+<div class="" id="bs-example-navbar-collapse-1">
+  <div>
+    <label>Search: </label>
+    <input [(ngModel)]="searchText" placeholder="name" />
+  </div>
+  <div>
+    <label>Sort: </label>
+    <select [(ngModel)]="sortBy">
+      <option value="">--Sort By--</option>
+      <option value="title">Title</option>
+      <option value="date">Date</option>
+    </select>
+  </div>
+  <div>
+    <label>Items Per Page: </label>
+    <select [(ngModel)]="itemsPer" (change)="itemsPerChanged($event.target.value)">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+  <div>
+    <label>Page: </label>
+    <button (click)="goBack()">Prev</button>
+    <select [(ngModel)]="currentPage" (change)="pageChanged($event.target.value)">
+      <option *ngFor="#p of pages" [value]="p">{{p}}</option>
+    </select>
+    <button (click)="goNext()">Next</button>
+  </div>
+</div><!-- /.navbar-collapse -->
+<div class="wrap">
+  <div *ngFor="#hero of heroes | myFilterPipe: searchText | mySortPipe:sortBy ; #i = index" (click)="gotoDetail(hero)" [hidden]="i > endAt || i < startAt" class="box">
+    <div class="boxInner">
+      <img *ngIf="i >= startAt && i <= endAt" height="42" width="42"  [src]="hero.url" (error)="setDefault($event)">
+      <div class="titleBox">{{hero.title}}</div>
     </div>
   </div>
 </div>

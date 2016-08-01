@@ -12,7 +12,6 @@ import { HeroService } from './hero.service';
     <h1>{{title}}</h1>
     <nav>
       <a [routerLink]="['Dashboard']">Dashboard</a>
-      <a [routerLink]="['Heroes']">Heroes</a>
     </nav>
     <router-outlet></router-outlet>
   `,
@@ -31,7 +30,7 @@ import { HeroService } from './hero.service';
     useAsDefault: true
   },
   {
-    path: '/detail/:id',
+    path: '/detail/:id/:isSlideshow',
     name: 'HeroDetail',
     component: HeroDetailComponent
   },
@@ -42,5 +41,5 @@ import { HeroService } from './hero.service';
   }
 ])
 export class AppComponent {
-  title = 'Tour of Heroes';
+  title = 'Angular 2 Gallery';
 }

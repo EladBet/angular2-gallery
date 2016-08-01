@@ -1,10 +1,21 @@
 <div *ngIf="hero">
-  <h2>{{hero.name}} details!</h2>
   <div>
-    <label>id: </label>{{hero.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name" />
+    <button (click)="goBack()">Prev</button>
+    <button (click)="slideshow()">Slideshow</button>
+    <button (click)="stopSlideshow()">Stop</button>
+    <button (click)="goNext()">Next</button>
   </div>
-  <button (click)="goBack()">Back</button>
+  <h2>{{hero.title}}</h2>
+  <div>
+    <label>ID: </label>{{hero.id}}</div>
+  <div>
+    <label>Date: </label>
+    {{hero.date}}
+  </div>
+
+  <div class="image">
+    <img class="preview"  [src]="hero.url" (error)="setDefault($event)">
+
+  </div>
+
 </div>
