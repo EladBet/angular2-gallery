@@ -46,14 +46,14 @@ export class HeroDetailComponent implements OnInit {
 
   goBack() {
     if (this.index > 0) {
-      let link = ['HeroDetail', {id: this.heroes[this.index - 1].id}];
+      let link = ['HeroDetail', {id: this.heroes[this.index - 1].id, isSlideshow: false}];
       this._router.navigate(link);
     }
   }
 
   goNext() {
     if (this.index < this.heroes.length-1) {
-      let link = ['HeroDetail', {id: this.heroes[this.index + 1].id}];
+      let link = ['HeroDetail', {id: this.heroes[this.index + 1].id, isSlideshow: false}];
       this._router.navigate(link);
     }
   }
@@ -73,5 +73,22 @@ export class HeroDetailComponent implements OnInit {
   }
   stopSlideshow() {
     clearTimeout(this.timer);
+  }
+
+  delete() {
+    let selected = this.heroes.filter(item => item.id === this.hero.id);
+    if (selected.length > 0) {
+      this.heroes.splice(selected.id, 1);
+      if (this.index < this.heroes.length-1)
+        //go next
+        let link = ['HeroDetail', {id: this.heroes[this.index].id, isSlideshow: false}];
+      }
+    else if (this.index > 0) {
+      //go back
+      let link = ['HeroDetail', {id: this.heroes[this.index-1].id, isSlideshow: false}];
+    }
+
+
+    this._router.navigate(link);
   }
 }
