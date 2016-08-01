@@ -1,4 +1,8 @@
 import { bootstrap }    from 'angular2/platform/browser';
 import { AppComponent } from './app.component';
 
-bootstrap(AppComponent);
+import { StorageService } from './storage.service';
+
+
+
+bootstrap(AppComponent, [StorageService]);

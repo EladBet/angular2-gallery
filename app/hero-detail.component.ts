@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from 'angular2/core';
 import { RouteParams } from 'angular2/router';
+import { Router } from 'angular2/router';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
-import { Router } from 'angular2/router';
+import { BlackListService } from './black-list.service';
 
 @Component({
   selector: 'my-hero-detail',
   templateUrl: 'app/hero-detail.component.html',
-  styleUrls: ['app/hero-detail.component.css']
+  styleUrls: ['app/hero-detail.component.css'],
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
@@ -20,6 +21,7 @@ export class HeroDetailComponent implements OnInit {
   constructor(
     private _router: Router,
     private _heroService: HeroService,
+    private _blackListService: BlackListService,
     private _routeParams: RouteParams) {
   }
 
@@ -76,19 +78,18 @@ export class HeroDetailComponent implements OnInit {
   }
 
   delete() {
-    let selected = this.heroes.filter(item => item.id === this.hero.id);
-    if (selected.length > 0) {
-      this.heroes.splice(selected.id, 1);
-      if (this.index < this.heroes.length-1)
-        //go next
-        let link = ['HeroDetail', {id: this.heroes[this.index].id, isSlideshow: false}];
-      }
-    else if (this.index > 0) {
-      //go back
-      let link = ['HeroDetail', {id: this.heroes[this.index-1].id, isSlideshow: false}];
+    this._blackListService.addToBlackList(this.heroes[this.index].id);
+    this.heroes.splice(this.index, 1);
+
+    if (this.index < this.heroes.length - 1) {
+      //go next
+      let link = ['HeroDetail', {id: this.heroes[this.index].id, isSlideshow: false}];
+      this._router.navigate(link);
     }
-
-
-    this._router.navigate(link);
+    else{
+      //go back
+      let link = ['HeroDetail', {id: this.heroes[this.index - 1].id, isSlideshow: false}];
+      this._router.navigate(link);
+    }
   }
 }

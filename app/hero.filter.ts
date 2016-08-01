@@ -13,9 +13,7 @@ export class MyFilterPipe implements PipeTransform {
     transform(heroes: any[], args: any[]): any {
         // filter items array, items which match and return true will be kept, false will be filtered out
         if (args[0])
-            return heroes.filter(item =>
-               item.title.toLowerCase().indexOf(args[0].toLowerCase()) !== -1
-            );
+            return heroes.filter(item => item.title.toLowerCase().indexOf(args[0].toLowerCase()) !== -1 );
         else
             return heroes;
     }

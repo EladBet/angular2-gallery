@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
+import { BlackListService } from './black-list.service';
 
 @Component({
   selector: 'my-app',
@@ -19,7 +20,8 @@ import { HeroService } from './hero.service';
   directives: [ROUTER_DIRECTIVES],
   providers: [
     ROUTER_PROVIDERS,
-    HeroService
+    HeroService,
+    BlackListService
   ]
 })
 @RouteConfig([
