@@ -7,21 +7,17 @@ import { BlackListService } from './black-list.service';
 @Injectable()
 export class HeroService {
   constructor(private _blackListService: BlackListService) {}
+  private heroes: Hero[] = [];
 
   getHeroes() {
     let itemsToFilter = this._blackListService.getBlackList();
-    return Promise.resolve(HEROES.filter(item => itemsToFilter.indexOf(item.id) === -1));
+
+    if (this.heroes.length > 0)
+      return Promise.resolve(this.heroes);
+    else {
+      this.heroes = HEROES.filter(item => itemsToFilter.indexOf(item.id) === -1);
+      return Promise.resolve(this.heroes);
+    }
   }
 
-  getHeroesSlowly() {
-    return new Promise<Hero[]>(resolve =>
-      setTimeout(()=>resolve(HEROES), 2000) // 2 seconds
-    );
-  }
-
-  getHero(id: number) {
-    return Promise.resolve(HEROES).then(
-      heroes => heroes.filter(hero => hero.id === id)[0]
-    );
-  }
 }

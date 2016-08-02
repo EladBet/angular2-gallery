@@ -5,6 +5,8 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import {MyFilterPipe} from './hero.filter';
 import {MySortPipe} from './hero.sort';
+import { Gallery, GalleryService } from './gallery';
+
 
 @Component({
   selector: 'my-dashboard',
@@ -22,13 +24,25 @@ export class DashboardComponent implements OnInit {
   currentPage: number = 1;
   pages: number[] = [];
 
+  search : boolean;
+  pagination  : boolean;
+  resultsPerPage : number;
+  sorting  : boolean;
+  autoRotateTime : number;
+  isFeedArray: boolean;
+  url: string;
+  feedArray:Hero[];
+
 
   constructor(
     private _router: Router,
     private _heroService: HeroService
+    ,private galleryService: GalleryService
   ) {}
 
   ngOnInit() {
+    this.search = this.galleryService.getSearch();
+
 
     this._heroService.getHeroes()
         .then(heroes => {
