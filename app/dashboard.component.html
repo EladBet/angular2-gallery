@@ -1,20 +1,18 @@
-<div class="" id="bs-example-navbar-collapse-1">
-  search:{{search}}
-  <div [hidden]="!search">
+<div class="nav-bar" id="bs-example-navbar-collapse-1">
+  <div class="control" [hidden]="!search">
     <label>Search: </label>
     <input [(ngModel)]="searchText" placeholder="name" />
   </div>
-  <div>
+  <div class="control" [hidden]="!sorting">
     <label>Sort: </label>
-    <select [(ngModel)]="sortBy">
+    <select [(ngModel)]="sortBy" (change)="sortByChanged($event.target.value)">
       <option value="">--Sort By--</option>
       <option value="title">Title</option>
       <option value="date">Date</option>
     </select>
   </div>
-  <div>
+  <div class="control" [hidden]="!pagination">
     <label>Items Per Page: </label>
-    itemsPer:{{itemsPer}}
     <select [(ngModel)]="itemsPer" (change)="itemsPerChanged($event.target.value)">
       <option value="5">5</option>
       <option value="10">10</option>
@@ -22,7 +20,7 @@
       <option value="20">20</option>
     </select>
   </div>
-  <div>
+  <div class="control pager" [hidden]="!pagination">
     <label>Page: </label>
     <button (click)="goBack()">Prev</button>
     <select [(ngModel)]="currentPage" (change)="pageChanged($event.target.value)">
@@ -31,7 +29,8 @@
     <button (click)="goNext()">Next</button>
   </div>
 </div><!-- /.navbar-collapse -->
-<div class="wrap">
+<div *ngIf="loading" class="loading">Loading...</div>
+<div class="wrap" *ngIf="!loading">
   <div *ngFor="#hero of heroes | myFilterPipe: searchText | mySortPipe:sortBy ; #i = index" (click)="gotoDetail(hero)" [hidden]="i > endAt || i < startAt" class="box">
     <div class="boxInner">
       <img *ngIf="i >= startAt && i <= endAt" height="42" width="42"  [src]="hero.url" (error)="setDefault($event)">

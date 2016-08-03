@@ -68,6 +68,27 @@ select {
 	display: none;
 }
 
+.nav-bar{
+	background-color: #f8f8f8;
+	position: relative;
+	min-height: 50px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 100%;
+	display: inline-flex;
+	padding: 10px;
+	border: 1px solid #e7e7e7;
+}
+
+.control{
+	margin-right: 7px;
+}
+
+.control.pager{
+	float:right;
+	margin-left: auto;
+}
+
 @media only screen and (max-width : 480px) {
 	/* Smartphone view: 1 tile */
 	.box {

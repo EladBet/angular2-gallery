@@ -6,7 +6,7 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { BlackListService } from './black-list.service';
 import { HTTP_PROVIDERS } from 'angular2/http';
-import { Gallery, GalleryService } from './gallery';
+import { GalleryService } from './gallery';
 
 @Component({
   selector: 'my-gallery',
@@ -47,12 +47,35 @@ export class GalleryComponent implements OnInit{
   @Input() resultsPerPage:number = 10;
   @Input() sorting:boolean = true;
   @Input() autoRotateTime:number = 40000;
-  @Input() feed:any = "https://s3.amazonaws.com/yotpo-ads/assets/images.json";
+  @Input() feed:any = [];
+  //@Input() feed:any = "https://s3.amazonaws.com/yotpo-ads/assets/images.json";
 
   constructor(private galleryService: GalleryService) {}
 
   ngOnInit() {
     this.galleryService.setSearch(this.search);
+    this.galleryService.setPagination(this.pagination);
+    this.galleryService.setResultPerPage(this.resultsPerPage);
+    this.galleryService.setSorting(this.sorting);
+    this.galleryService.setAutoRotateTime(this.autoRotateTime);
+
+    if (this.isArray(this.feed))   {
+      this.galleryService.isArrayFeed = true;
+      this.galleryService.feed = this.feed;
+    }
+    else {
+      this.galleryService.isArrayFeed = false;
+      this.galleryService.url = this.feed;
+    }
+
+
+  }
+
+  private isArray(arr: any){
+    if( Object.prototype.toString.call( arr ) === '[object Array]' ) {
+      return true;
+    }
+    return false;
   }
 
   title = 'Angular 2 Gallery';

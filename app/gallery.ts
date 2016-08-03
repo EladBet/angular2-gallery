@@ -3,29 +3,58 @@ import { Injectable } from 'angular2/core';
 import { Hero } from './hero';
 
 
-
-export class Gallery {
-  search : boolean;
-  pagination  : boolean;
-  resultsPerPage : number;
-  sorting  : boolean;
-  autoRotateTime : number;
-  isFeedArray: boolean;
-  url: string;
-  feedArray:Hero[];
-}
-
 @Injectable()
 export class GalleryService {
 
-  search: boolean = true;
+  private search: boolean;
+  private pagination: boolean;
+  private resultsPerPage: number;
+  private sorting: boolean;
+  private autoRotateTime: number;
+  isArrayFeed:boolean;
+  feed: Hero[];
+  url: string;
+  sortBy:string = "";
 
-  setSearch(search: boolean) {
-    this.search = search;
+
+  setSearch(value: boolean) {
+    this.search = value;
   }
 
   getSearch(){
     return this.search;
+  }
+
+  setPagination(value: boolean) {
+    this.pagination = value;
+  }
+
+  getPagination(){
+    return this.pagination;
+  }
+
+  setResultPerPage(value: number) {
+    this.resultsPerPage = value;
+  }
+
+  getResultPerPage(){
+    return this.resultsPerPage;
+  }
+
+  setSorting(value: boolean) {
+    this.sorting = value;
+  }
+
+  getSorting(){
+    return this.sorting;
+  }
+
+  setAutoRotateTime(value: number) {
+    this.autoRotateTime = value;
+  }
+
+  getAutoRotateTime(){
+    return this.autoRotateTime;
   }
 
 }

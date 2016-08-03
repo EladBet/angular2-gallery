@@ -24,14 +24,36 @@ label {
 }
 
 button {
-  margin-top: 20px;
   font-family: Arial;
-  background-color: #eee;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
   border: none;
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
   cursor: hand;
+}
+
+.nav-bar{
+  background-color: #f8f8f8;
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+  display: inline-flex;
+  padding: 10px;
+  border: 1px solid #e7e7e7;
+}
+
+.nav-bar .left{
+  float:left;
+}
+.nav-bar .right{
+  float:right;
+}
+.nav-bar .center{
+  margin:0 auto;
+  width:210px;
 }
 
 button.delete-btn{
@@ -40,7 +62,9 @@ button.delete-btn{
 }
 
 button:hover {
-  background-color: #cfd8dc;
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
 }
 button:disabled {
   background-color: #eee;

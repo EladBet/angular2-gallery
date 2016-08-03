@@ -5,7 +5,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import {MyFilterPipe} from './hero.filter';
 import {MySortPipe} from './hero.sort';
-import { Gallery, GalleryService } from './gallery';
+import {GalleryService } from './gallery';
 
 
 @Component({
@@ -16,44 +16,54 @@ import { Gallery, GalleryService } from './gallery';
 })
 export class DashboardComponent implements OnInit {
 
-  heroes: Hero[] = [];
-  sortBy: string = "";
-  itemsPer: number = 5;
-  startAt: number = 0;
-  endAt: number = 4;
-  currentPage: number = 1;
-  pages: number[] = [];
+  private heroes: Hero[] = [];
+  private sortBy: string;
+  private itemsPer: number;
+  private startAt: number;
+  private endAt: number;
+  private currentPage: number = 1;
+  private pages: number[] = [];
+  private loading: boolean = false;
 
-  search : boolean;
-  pagination  : boolean;
-  resultsPerPage : number;
-  sorting  : boolean;
-  autoRotateTime : number;
-  isFeedArray: boolean;
-  url: string;
-  feedArray:Hero[];
+  private search : boolean;
+  private pagination  : boolean;
+  private resultsPerPage : number;
+  private sorting  : boolean;
+  private isFeedArray: boolean;
+  private url: string;
+  private feedArray:Hero[];
 
 
   constructor(
     private _router: Router,
-    private _heroService: HeroService
-    ,private galleryService: GalleryService
+    private _heroService: HeroService,
+    private galleryService: GalleryService
   ) {}
 
   ngOnInit() {
     this.search = this.galleryService.getSearch();
+    this.pagination = this.galleryService.getPagination();
+    this.itemsPer = this.galleryService.getResultPerPage();
+    this.sorting = this.galleryService.getSorting();
+    this.sortBy = this.galleryService.sortBy;
 
-
+    this.loading = true;
     this._heroService.getHeroes()
         .then(heroes => {
+          this.loading = false;
           this.heroes = heroes;
           this.pages = [];
-          if (this.itemsPer > 0) {
+          if (this.itemsPer > 0 && this.pagination) {
             let numberOfPages = Math.ceil(heroes.length / this.itemsPer);
             for (let i = 1; i <= numberOfPages; i++) {
               this.pages.push(i);
             }
           }
+          else {
+            this.pages.push(1);
+            this.itemsPer = this.heroes.length;
+          }
+          this.pageChanged(1);
         });
       //.then(heroes => this.heroes = heroes.slice(1,5));
   }
@@ -64,6 +74,8 @@ export class DashboardComponent implements OnInit {
   }
 
   itemsPerChanged(items: number){
+    this.galleryService.setResultPerPage(items);
+
     this.startAt =  items*(this.currentPage-1);
     this.endAt =  items*(this.currentPage-1) + (items-1);
     this.currentPage = 1;
@@ -74,6 +86,10 @@ export class DashboardComponent implements OnInit {
         this.pages.push(i);
       }
     }
+  }
+
+  sortByChanged(value: string){
+    this.galleryService.sortBy = value;
   }
 
   pageChanged(page: number){

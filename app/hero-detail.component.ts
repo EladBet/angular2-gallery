@@ -5,6 +5,7 @@ import { Router } from 'angular2/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { BlackListService } from './black-list.service';
+import {GalleryService } from './gallery';
 
 @Component({
   selector: 'my-hero-detail',
@@ -16,18 +17,20 @@ export class HeroDetailComponent implements OnInit {
   index: number = -1;
   heroes: Hero[] = [];
   timer: any;
-  timeout: number = 5000;
+  timeout: number;
 
   constructor(
     private _router: Router,
     private _heroService: HeroService,
     private _blackListService: BlackListService,
-    private _routeParams: RouteParams) {
+    private _routeParams: RouteParams,
+    private galleryService: GalleryService) {
   }
 
   ngOnInit() {
     let id = +this._routeParams.get('id');
     let isSlideshow = +this._routeParams.get('isSlideshow');
+    this.timeout = this.galleryService.getAutoRotateTime();
 
     this._heroService.getHeroes()
         .then(heroes =>  {
