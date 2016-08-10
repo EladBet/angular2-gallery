@@ -2,8 +2,8 @@ import { Component, Input, OnInit} from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { HeroDetailComponent } from './hero-detail.component';
-import { HeroService } from './hero.service';
+import { PhotoDetailComponent } from './photo-detail.component';
+import { PhotoService } from './photo.service';
 import { BlackListService } from './black-list.service';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import { GalleryService } from './gallery';
@@ -22,7 +22,7 @@ import { GalleryService } from './gallery';
   providers: [
     ROUTER_PROVIDERS,
     //HTTP_PROVIDERS,
-    HeroService,
+    PhotoService,
     GalleryService,
     BlackListService
   ]
@@ -37,8 +37,8 @@ import { GalleryService } from './gallery';
   },
   {
     path: '/detail/:id/:isSlideshow',
-    name: 'HeroDetail',
-    component: HeroDetailComponent
+    name: 'PhotoDetail',
+    component: PhotoDetailComponent
   }
 ])*/
 export class GalleryComponent implements OnInit{

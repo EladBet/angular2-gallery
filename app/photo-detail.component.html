@@ -1,4 +1,4 @@
-<div *ngIf="hero">
+<div *ngIf="photo">
   <div class="nav-bar">
     <div class="left">
       <button (click)="goBack()">Prev</button>
@@ -13,16 +13,16 @@
     </div>
 
   </div>
-  <h2>{{hero.title}}</h2>
+  <h2>{{photo.title}}</h2>
   <div>
-    <label>ID: </label>{{hero.id}}</div>
+    <label>ID: </label>{{photo.id}}</div>
   <div>
     <label>Date: </label>
-    {{hero.date}}
+    {{photo.date}}
   </div>
 
   <div class="image">
-    <img class="preview"  [src]="hero.url" (error)="setDefault($event)">
+    <img class="preview"  [src]="photo.url" (error)="setDefault($event)">
 
   </div>
 

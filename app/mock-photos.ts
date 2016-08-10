@@ -1,6 +1,6 @@
-import { Hero } from './hero';
+import { Photo } from './photo';
 
-export var HEROES: Hero[] = [
+export var PHOTOS: Photo[] = [
   {
     "title": "Blue river (much better in original size - press)",
     "url": "http://farm9.static.flickr.com/8305/7893507666_0d25cd9f30.jpg",

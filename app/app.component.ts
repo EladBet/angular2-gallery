@@ -2,12 +2,12 @@ import { Component, Input, OnInit} from 'angular2/core';
 import { GalleryComponent } from './gallery.component';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router'
 import { DashboardComponent } from './dashboard.component';
-import { HeroDetailComponent } from './hero-detail.component';
+import { PhotoDetailComponent } from './photo-detail.component';
 
 @Component({
   selector: 'my-app',
   //template: `<my-gallery [feed]="feed" [search]="true" [pagination]="true" [resultsPerPage]="5" [sorting]="true"  [autoRotateTime]="1000"></my-gallery>`,
-  template: `<my-gallery [feed]="'https://s3.amazonaws.com/yotpo-ads/assets/images.json'" [search]="true" [pagination]="true" [resultsPerPage]="5" [sorting]="true"  [autoRotateTime]="1000"></my-gallery>`,
+  template: `<my-gallery [feed]="'https://mock.json'" [search]="true" [pagination]="true" [resultsPerPage]="5" [sorting]="true"  [autoRotateTime]="4000"></my-gallery>`,
   directives:[GalleryComponent]
 })
 
@@ -20,8 +20,8 @@ import { HeroDetailComponent } from './hero-detail.component';
   },
   {
     path: '/detail/:id/:isSlideshow',
-    name: 'HeroDetail',
-    component: HeroDetailComponent
+    name: 'PhotoDetail',
+    component: PhotoDetailComponent
   }
 ])
 

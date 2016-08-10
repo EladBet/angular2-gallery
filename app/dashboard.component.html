@@ -31,10 +31,10 @@
 </div><!-- /.navbar-collapse -->
 <div *ngIf="loading" class="loading">Loading...</div>
 <div class="wrap" *ngIf="!loading">
-  <div *ngFor="#hero of heroes | myFilterPipe: searchText | mySortPipe:sortBy ; #i = index" (click)="gotoDetail(hero)" [hidden]="i > endAt || i < startAt" class="box">
+  <div *ngFor="#photo of photos | myFilterPipe: searchText | mySortPipe:sortBy ; #i = index" (click)="gotoDetail(photo)" [hidden]="i > endAt || i < startAt" class="box">
     <div class="boxInner">
-      <img *ngIf="i >= startAt && i <= endAt" height="42" width="42"  [src]="hero.url" (error)="setDefault($event)">
-      <div class="titleBox">{{hero.title}}</div>
+      <img *ngIf="i >= startAt && i <= endAt" height="42" width="42"  [src]="photo.url" (error)="setDefault($event)">
+      <div class="titleBox">{{photo.title}}</div>
     </div>
   </div>
 </div>

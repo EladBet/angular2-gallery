@@ -1,6 +1,6 @@
 import { Injectable } from 'angular2/core';
 
-import { Hero } from './hero';
+import { Photo } from './photo';
 
 
 @Injectable()
@@ -12,7 +12,7 @@ export class GalleryService {
   private sorting: boolean;
   private autoRotateTime: number;
   isArrayFeed:boolean;
-  feed: Hero[];
+  feed: Photo[];
   url: string;
   sortBy:string = "";
 

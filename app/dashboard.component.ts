@@ -1,10 +1,10 @@
 import { Component, OnInit } from 'angular2/core';
 import { Router } from 'angular2/router';
 
-import { Hero } from './hero';
-import { HeroService } from './hero.service';
-import {MyFilterPipe} from './hero.filter';
-import {MySortPipe} from './hero.sort';
+import { Photo } from './photo';
+import { PhotoService } from './photo.service';
+import {MyFilterPipe} from './photo.filter';
+import {MySortPipe} from './photo.sort';
 import {GalleryService } from './gallery';
 
 
@@ -16,7 +16,7 @@ import {GalleryService } from './gallery';
 })
 export class DashboardComponent implements OnInit {
 
-  private heroes: Hero[] = [];
+  private photos: Photo[] = [];
   private sortBy: string;
   private itemsPer: number;
   private startAt: number;
@@ -31,12 +31,12 @@ export class DashboardComponent implements OnInit {
   private sorting  : boolean;
   private isFeedArray: boolean;
   private url: string;
-  private feedArray:Hero[];
+  private feedArray:Photo[];
 
 
   constructor(
     private _router: Router,
-    private _heroService: HeroService,
+    private _photoService: PhotoService,
     private galleryService: GalleryService
   ) {}
 
@@ -48,28 +48,28 @@ export class DashboardComponent implements OnInit {
     this.sortBy = this.galleryService.sortBy;
 
     this.loading = true;
-    this._heroService.getHeroes()
-        .then(heroes => {
+    this._photoService.getPhotos()
+        .then(photos => {
           this.loading = false;
-          this.heroes = heroes;
+          this.photos = photos;
           this.pages = [];
           if (this.itemsPer > 0 && this.pagination) {
-            let numberOfPages = Math.ceil(heroes.length / this.itemsPer);
+            let numberOfPages = Math.ceil(photos.length / this.itemsPer);
             for (let i = 1; i <= numberOfPages; i++) {
               this.pages.push(i);
             }
           }
           else {
             this.pages.push(1);
-            this.itemsPer = this.heroes.length;
+            this.itemsPer = this.photos.length;
           }
           this.pageChanged(1);
         });
-      //.then(heroes => this.heroes = heroes.slice(1,5));
+      //.then(photos => this.photos = photos.slice(1,5));
   }
 
-  gotoDetail(hero: Hero) {
-    let link = ['HeroDetail', { id: hero.id , isSlideshow: false}];
+  gotoDetail(photo: Photo) {
+    let link = ['PhotoDetail', { id: photo.id , isSlideshow: false}];
     this._router.navigate(link);
   }
 
@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     this.currentPage = 1;
     this.pages = [];
     if (this.itemsPer > 0) {
-      let numberOfPages = Math.ceil(this.heroes.length / items);
+      let numberOfPages = Math.ceil(this.photos.length / items);
       for (let i = 1; i <= numberOfPages; i++) {
         this.pages.push(i);
       }
