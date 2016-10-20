@@ -1,5 +1,3 @@
 Some text.
 
 another change.
-
-Local Change 1
