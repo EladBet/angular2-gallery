@@ -4,4 +4,4 @@ another change.
 
 Remote change 1
 
-Remote chage 2
+Local change 2
