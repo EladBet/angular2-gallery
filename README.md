@@ -7,3 +7,7 @@
 3. Run the TypeScript compiler, watch for changes, start the server, and launch the browser by using `npm start`
 
 resolving conflicts
+
+Local change 1
+
+Local change 2
