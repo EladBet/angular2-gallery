@@ -2,4 +2,7 @@ Some text.
 
 another change.
 
+Remote change 1
+
+
 Local Change 1
